@@ -1,0 +1,90 @@
+﻿@model EmployeeUpdateDto
+@{
+    ViewData["Title"] = "UpdateEmployee";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1 class="fw-bolder text-center " style="color:darkred">Personel Güncelleme</h1>
+
+@*@if (ViewBag.UpdateError != null)
+{
+        <div class="alert alert-danger" role="alert">
+        @ViewBag.UpdateError
+        </div>
+}
+else
+{*@
+    <form asp-area="Admin" asp-controller="Admin" asp-action="UpdateEmployee" method="post" enctype="multipart/form-data">
+
+            <input type="hidden" asp-for="EmployeeId" />
+            <div class="mb-3">
+                <label class="form-label"> Adı</label>
+                <input type="text" class="form-control" asp-for="Name" value="@Model.Name">
+                      <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Soyadı</label>
+                <input type="text" class="form-control" asp-for="Surname" value="@Model.Surname">
+            <span asp-validation-for="Surname" class="text-danger"></span>
+            </div>
+
+        <div class="mb-3">
+            <label class="form-label">Ünvan</label>
+            <input type="text" class="form-control" asp-for="Title" value="@Model.Title">
+                  <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+
+
+        <div class="mb-3">
+            <label class="form-label">Yaş</label>
+            <input type="text" class="form-control" asp-for="Age" value="@Model.Age">
+                  <span asp-validation-for="Age" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Adres</label>
+            <input type="text" class="form-control" asp-for="Address" value="@Model.Address">
+                  <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Mail</label>
+            <input type="email" class="form-control" asp-for="Email" value="@Model.Email">
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Cinsiyet</label>
+            <input type="text" class="form-control" asp-for="GenderStatus" value="@Model.GenderStatus">
+                  <span asp-validation-for="GenderStatus" class="text-danger"></span>
+        </div>
+
+            <div class="mb-3">
+                <label class="form-label">Resim Yolu</label>
+                <input type="file" class="form-control" asp-for="Image" value="@Model.Image">
+            </div>
+
+            <button type="submit" class="btn btn-primary"> <i class="fa fa-check" aria-hidden="true"></i>   Gönder</button>
+        </form>
+@*}*@
+
+@section Scripts {
+         <script>
+             ﻿
+        let isSubmitting = false;
+
+        // Tüm form elementlerini seçin ve submit olayını dinleyin
+        const forms = document.querySelectorAll("form");
+        forms.forEach(function (form) {
+            form.addEventListener("submit", function (e) {
+                if (isSubmitting) {
+                    e.preventDefault();
+                } else {
+                    isSubmitting = true;
+                    // İşlem devam ediyor...
+                }
+            });
+        });
+         </script>
+}

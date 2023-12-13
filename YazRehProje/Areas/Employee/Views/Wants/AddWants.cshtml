@@ -1,0 +1,67 @@
+﻿@model Entities.DTO.WantsDto.WantsCreateDto
+@{
+    ViewData["Title"] = "AddWants";
+    Layout = "~/Areas/Employee/Views/Shared/_EmployeeLayout.cshtml";
+}
+
+<h1 class="fw-bolder text-center " style="color:darkred">İstek Ekleme</h1>
+@*
+@if (ViewBag.AddError != null)
+{
+        <div class="alert alert-danger" role="alert">
+        @ViewBag.AddError
+    </div>
+}
+else if (ViewBag.Add != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.Add
+    </div>
+}
+
+else
+{
+    *@    <form asp-area="Employee" asp-controller="Wants" asp-action="AddWants" method="post" >
+
+           
+            <div class="mb-2 col-md-6 mx-auto">
+                <label class="form-label"> Tanım</label>
+                <input type="text" class="form-control" asp-for="Explanation" >
+                 <span asp-validation-for="Explanation" class="text-danger"></span>
+            </div>
+
+            <div class="mb-2 col-md-6 mx-auto">
+                <label class="form-label"> Açıklama</label>
+                <input type="text" class="form-control" asp-for="Description" >
+        <span asp-validation-for="Explanation" class="text-danger"></span>
+            </div>
+
+            <div class="mb-2 col-md-6 mx-auto">
+                <label class="form-label"> Durum</label>
+                <input type="text" class="form-control" asp-for="Conclusion" >
+            </div>
+
+              <div style="text-align:center;">
+            <button type="submit" class="btn btn-primary text-center"><i class="fa fa-check" aria-hidden="true"></i>     Gönder</button>
+        </div>
+        </form>
+@*}*@
+
+                @section Scripts {
+ <script>
+     ﻿
+let isSubmitting = false;
+
+// Tüm form elementlerini seçin ve submit olayını dinleyin
+const forms = document.querySelectorAll("form");
+forms.forEach(function (form) {
+    form.addEventListener("submit", function (e) {
+        if (isSubmitting) {
+            e.preventDefault();
+        } else {
+            isSubmitting = true;
+            // İşlem devam ediyor...
+        }
+    });
+});
+ </script>}

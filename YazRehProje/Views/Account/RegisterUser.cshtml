@@ -1,0 +1,66 @@
+﻿@model UserForRegistrationDto
+@{
+    ViewData["Title"] = "RegisterUser";
+    Layout = "~/Views/SharedNew/_Layout.cshtml";
+}
+
+<h1 class="fw-bolder text-center " style="color:darkred">Kayıt Olma</h1>
+
+
+<div class="container ">
+    <div class="row justify-content-center">
+    <div class="col-md-4">
+            <form asp-controller="Account" asp-action="RegisterUser" method="post">
+               
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Kullanıcı Adınız</label>
+                    <input type="text" class="form-control" asp-for="Username" placeholder="Kullanıcı Adınız">
+                     <span asp-validation-for="Username" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Mail</label>
+                    <input type="email" class="form-control" asp-for="Email" placeholder="Email">
+                     <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Şifre</label>
+                    <input type="password" class="form-control" asp-for="Password" id="exampleInputPassword1" placeholder="Şifreniz">
+                     <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Şifre Tekrar</label>
+                    <input type="password" class="form-control" asp-for="ConfirmPassword" id="exampleInputPassword1" placeholder="Şifreniz">
+                     <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div><br />
+               @* <input type="submit" class="btn btn-primary" value="Kayıt Ol" />*@
+                <button type="submit" class="btn btn-primary">Kayıt Ol</button>
+
+               @* <div class="text-dark" asp-validation-summary="ModelOnly"></div>*@<!-- BU KISIM HATAYI DÖNDÜRÜYOR BUNU BACKEND TARAFINDA ELSE KISMINDA  FOREACH İLE YAPIYORUZ-->
+            </form>
+    </div>
+  </div>
+</div>
+
+@section Scripts {
+     <script>
+         ﻿
+    let isSubmitting = false;
+
+    // Tüm form elementlerini seçin ve submit olayını dinleyin
+    const forms = document.querySelectorAll("form");
+    forms.forEach(function (form) {
+        form.addEventListener("submit", function (e) {
+            if (isSubmitting) {
+                e.preventDefault();
+            } else {
+                isSubmitting = true;
+                // İşlem devam ediyor...
+            }
+        });
+    });
+     </script>
+}

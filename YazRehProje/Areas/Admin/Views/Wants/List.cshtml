@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Wants>
+@{
+    ViewData["Title"] = "List";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1 class="fw-bolder text-center " style="color:darkred">İhtiyaçlar</h1>
+
+@if (Model.Count() == 0)
+{
+    <div class="alert alert-danger" role="alert">
+        Kayıt Bulunamadı
+    </div>
+}
+else
+{
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Tanım</th>
+                <th scope="col">Açıklama</th>
+                <th scope="col">Sonuc</th>
+                
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tbody>
+                <tr>
+                    <th scope="row">@item.WantsId</th>                 
+                    <td>@item.Explanation</td>
+                    <td>@item.Description</td>
+                    <td>@item.Conclusion</td>
+
+
+                    <td><a class="btn btn-danger" asp-area="Admin" asp-controller="Wants" asp-action="DeleteWants" asp-route-id="@item.WantsId" id="BtnSilme" onclick="return confirm('Silmek İstediğinize Emin Misiniz');"><i class="fa fa-trash" aria-hidden="true"></i>    Sil</a></td>
+                    <td><a asp-area="Admin" asp-controller="Wants" asp-action="UpdateWants" class="btn btn-success" asp-route-id="@item.WantsId"><i class="fa fa-arrow-right" aria-hidden="true"></i>     Güncelle</a></td>
+                </tr>
+            </tbody>
+        }
+
+
+
+    </table>
+}

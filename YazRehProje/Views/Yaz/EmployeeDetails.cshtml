@@ -1,0 +1,36 @@
+﻿@model Employee
+@{
+    ViewData["Title"] = "EmployeeDetails";
+    Layout = "~/Views/SharedNew/_Layout.cshtml";
+}
+<h1 class="fw-bolder text-center " style="color:darkred">Personel  @Model.Name &nbsp; @Model.Surname Detaylı Bilgiler </h1>
+@if (!String.IsNullOrEmpty(Model.ImagePath))
+{
+    <img class="card-img-top" src="~/images/@Model.ImagePath" style="height:300px; width:300px;" alt="Card image cap ">
+}
+else
+{
+    <img class="card-img-top" src="~/images/Noimage.png" style="height:300px; width:300px;" alt="Card image cap ">
+}
+<br />
+<br />
+
+<div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+    <div class="card-header">Header</div>
+    <div class="card-body">
+        <h5 class="card-title">@Model.Name &nbsp; @Model.Surname Detay</h5>
+        <p class="card-text">
+            <ul class="list-group">
+                <li class="list-group-item">Ünvan : @Model.Title</li>
+                <li class="list-group-item">Yaş :  @Model.Age</li>
+                <li class="list-group-item">Cinsiyet : @Model.GenderStatus</li>
+                <li class="list-group-item">Email : @Model.Email</li>
+                <li class="list-group-item">Adres : @Model.Address</li> 
+            </ul>
+
+        </p>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,33 @@
+﻿@model Entities.DTO.UserDto.DeleteRoleDto
+@{
+    ViewData["Title"] = "DeleteRol";
+    Layout = "~/Views/SharedNew/_Layout.cshtml";
+}
+
+<h1 class="fw-bolder text-center " style="color:darkred">@Model.UserName User  Role Silme</h1><br />
+
+<form asp-area="Admin" asp-controller="Role" asp-action="DeleteRol" method="post" >
+
+    <input type="hidden" asp-for="UserId" />
+  
+    <input type="hidden" asp-for="UserName" />
+
+
+    <div class="mb-2 col-md-6 mx-auto">
+      
+        <select asp-for="RoleId" id="inputState" class="form-control">
+            <option selected>Lütfen Rol Seçin</option>
+            @foreach (var role in Model.Roles.ToList())
+            {
+                <option value="@role"> @role </option>
+            }
+        </select>
+    </div>
+
+
+
+    <div style="text-align:center;">
+        <button type="submit" class="btn btn-primary text-center"><i class="fa fa-trash" aria-hidden="true"></i>   Sil</button>
+    </div>
+
+</form>

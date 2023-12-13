@@ -1,0 +1,64 @@
+﻿@model AppointmentDto
+@{
+    ViewData["Title"] = "CreateAppointment";
+    Layout = "~/Areas/User/Views/Shared/_UserLayout.cshtml";
+}
+
+<h1 class="fw-bolder text-center " style="color:darkred">Randevu Al</h1>
+
+<form asp-area="User" asp-controller="Appointment" asp-action="CreateAppointment" method="post">
+
+            <input type="hidden" asp-for="AppointmentId" />
+    <div class ="mb-2 col-md-6 mx-auto"   >
+                <label class="form-label"> Tarih</label>
+        <input type="text" class="form-control" asp-for="AppointmentDate" value="@Model.AppointmentDate.ToShortDateString()" >
+                      <span asp-validation-for="AppointmentDate" class="text-danger"></span>
+     </div>
+
+      <div class ="mb-2 col-md-6 mx-auto"   >
+                <label class="form-label"> Saat</label>
+        <input type="text" class="form-control" asp-for="AppointmentTime" value="@Model.AppointmentTime">
+        <span asp-validation-for="AppointmentTime" class="text-danger"></span>
+     </div>
+
+    <div class="mb-2 col-md-6 mx-auto">
+        <label class="form-label"> Öğrenci Adı</label>
+        <input type="text" class="form-control" asp-for="StudentName" >
+        <span asp-validation-for="StudentName" class="text-danger"></span>
+    </div>
+
+    <div class="mb-2 col-md-6 mx-auto">
+        <label class="form-label"> Öğrenci Soyadı</label>
+        <input type="text" class="form-control" asp-for="StudentSurname">
+        <span asp-validation-for="StudentSurname" class="text-danger"></span>
+    </div>
+    <input type="hidden" asp-for="BosDolu" value="1" />
+
+
+
+
+
+    <div style="text-align:center;">
+        <button type="submit" class="btn btn-primary text-center"><i class="fa fa-check" aria-hidden="true"></i>   Randevu Al</button>
+    </div>
+        </form>
+
+@section scripts {
+         <script>
+             ﻿
+        let isSubmitting = false;
+
+        // Tüm form elementlerini seçin ve submit olayını dinleyin
+        const forms = document.querySelectorAll("form");
+        forms.forEach(function (form) {
+            form.addEventListener("submit", function (e) {
+                if (isSubmitting) {
+                    e.preventDefault();
+                } else {
+                    isSubmitting = true;
+                    // İşlem devam ediyor...
+                }
+            });
+        });
+         </script>
+}

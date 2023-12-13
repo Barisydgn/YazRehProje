@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Employee>
+@{
+    ViewData["Title"] = "List";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1 class="fw-bolder text-center " style="color:darkred">Personel Listesi</h1>
+
+<a class="btn btn-info" asp-area="Admin" asp-controller="Admin" asp-action="AddEmployee"><i class="fa fa-user" aria-hidden="true"></i>      Personel Ekle</a>
+<br />
+<br />
+@if (Model.Count()==0)
+{
+    <div class="alert alert-danger" role="alert">
+        Kayıt Bulunamadı
+    </div>
+}
+else
+{
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Ad Soyad</th>
+                <th scope="col">Yaş</th>
+                <th scope="col">Ünvan</th>
+                <th scope="col">Adres</th>
+                <th scope="col">Mail</th>
+                <th scope="col">Cinsiyet</th>
+                <th scope="col">Fotoğraf</th>
+                <th scope="col">İşlem</th>
+                <th scope="col">İşlem</th>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+                    <tbody>
+                        <tr>
+                            <th scope="row">@item.EmployeeId</th>
+                            <td>@item.Name &nbsp; @item.Surname</td>
+                            <td>@item.Age</td>
+                            <td>@item.Title</td>
+                            <td>@item.Address</td>
+                            <td>@item.Email</td>
+                            <td>@item.GenderStatus</td>
+                    @if (!String.IsNullOrEmpty(item.ImagePath))
+                    {
+                        <td>
+                            <div class="d-flex align-items-center"><img style="height:40px; width:50px;" class="rounded-circle" src="~/images/@item.ImagePath" width="30"><span class="ml-2"></span></div>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            <div class="d-flex align-items-center"><img style="height:40px; width:50px;" class="rounded-circle" src="~/images/Noimage.png" width="30"><span class="ml-2"></span></div>
+                        </td>
+                    }
+                    <td><a class="btn btn-danger" asp-area="Admin" asp-controller="Admin" asp-action="DeleteEmployee" asp-route-id="@item.EmployeeId" id="BtnSilme" onclick="return confirm('Silmek İstediğinize Emin Misiniz');"><i class="fa fa-trash" aria-hidden="true"></i>  Sil</a></td>
+                    <td><a asp-area="Admin" asp-controller="Admin" asp-action="UpdateEmployee" class="btn btn-success" asp-route-id="@item.EmployeeId"> <i class="fa fa-arrow-right" aria-hidden="true"></i>  Güncelle</a></td>
+                </tr>
+                    </tbody>
+        }
+
+
+
+    </table>
+}

@@ -1,0 +1,83 @@
+﻿@model EmployeeCreateDto
+@{
+    ViewData["Title"] = "AddEmployee";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1 class="fw-bolder text-center " style="color:darkred">Personel Ekleme</h1>
+
+@*@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.Error
+    </div>
+}
+else{
+*@
+    <form asp-area="Admin" asp-controller="Admin" asp-action="AddEmployee" method="post" enctype="multipart/form-data">
+        <div class="mb-2 col-md-6 mx-auto">
+            <label for="exampleInputEmail1" class="form-label" >Ad</label>
+            <input type="text" class="form-control" id="exampleInputEmail1"  asp-for="Name" aria-describedby="emailHelp">
+             <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="mb-2 col-md-6 mx-auto">
+            <label for="exampleInputEmail1" class="form-label">Soyad</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" asp-for="Surname" aria-describedby="emailHelp">
+            <span asp-validation-for="Surname" class="text-danger"></span>
+        </div>
+        <div class="mb-2 col-md-6 mx-auto">
+            <label for="exampleInputEmail1" class="form-label">Ünvan</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" asp-for="Title" aria-describedby="emailHelp">
+             <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+        <div class="mb-2 col-md-6 mx-auto">
+            <label for="exampleInputEmail1" class="form-label">Yas</label>
+            <input type="number" class="form-control" id="exampleInputEmail1" asp-for="Age" aria-describedby="emailHelp">
+            <span asp-validation-for="Age" class="text-danger"></span>
+        </div>
+        <div class="mb-2 col-md-6 mx-auto">
+            <label for="exampleInputEmail1" class="form-label">Adres</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" asp-for="Address" aria-describedby="emailHelp">
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+        <div class="mb-2 col-md-6 mx-auto">
+            <label for="exampleInputEmail1" class="form-label">Mail</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" asp-for="Email" aria-describedby="emailHelp">
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <div class="mb-2 col-md-6 mx-auto">
+            <label for="exampleInputEmail1" class="form-label">Cinsiyet</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" asp-for="GenderStatus" aria-describedby="emailHelp">
+        </div>
+
+        <div class="mb-2 col-md-6 mx-auto">
+            <label for="formFileLg" class="form-label col-md-6">Fotoğraf</label>
+            <input class="form-control form-control-lg" asp-for="Image" type="file">
+        </div>
+        <div style="text-align:center;">
+            <button type="submit" class="btn btn-primary text-center"><i class="fa fa-check" aria-hidden="true"></i>    Kaydet</button>
+        </div>
+       
+
+    </form>
+@*}*@
+
+@section Scripts {
+ <script>
+     ﻿
+let isSubmitting = false;
+
+// Tüm form elementlerini seçin ve submit olayını dinleyin
+const forms = document.querySelectorAll("form");
+forms.forEach(function (form) {
+    form.addEventListener("submit", function (e) {
+        if (isSubmitting) {
+            e.preventDefault();
+        } else {
+            isSubmitting = true;
+            // İşlem devam ediyor...
+        }
+    });
+});
+ </script>}

@@ -1,0 +1,50 @@
+﻿@using Entities.DTO.StudentDto;
+@model IEnumerable<Student>
+@{
+    ViewData["Title"] = "List";
+    Layout = "~/Areas/Employee/Views/Shared/_EmployeeLayout.cshtml";
+}
+
+<h1 class="fw-bolder text-center " style="color:darkred">Öğrenci Listesi </h1>
+
+@if (Model.Count() == 0)
+{
+    <div class="alert alert-danger" role="alert">
+        Kayıt Bulunamadı
+    </div>
+}
+else
+{
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Ad Soyad</th>
+                <th scope="col">Yaş</th>
+                <th scope="col">Adres</th>
+                <th scope="col">Tanı</th>
+                <th scope="col">Egzersiz</th>
+                <th scope="col">Personel Ad</th>
+                <th scope="col">İşlem</th>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tbody>
+                <tr>
+                    <th scope="row">@item.StudentId</th>
+                    <td>@item.Name &nbsp; @item.Surname</td>
+                    <td>@item.Age</td>
+                    <td>@item.Address</td>
+                    <td>@item.Diagnosis</td>
+                    <td>@item.Exercise</td>
+                    <td>@item.Employee.Name</td>
+                    <td><a asp-area="Employee" asp-controller="Student" asp-action="UpdateStudent" class="btn btn-success" asp-route-id="@item.StudentId"><i class="fa fa-arrow-right" aria-hidden="true"></i>     Güncelle</a></td>
+                </tr>
+            </tbody>
+        }
+
+
+
+    </table>
+}

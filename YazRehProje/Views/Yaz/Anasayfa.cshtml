@@ -1,0 +1,314 @@
+﻿@{
+    ViewData["Title"] = "Employee";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Yaz Özel Eğitim</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="~/Template/Moderna/assets/img/favicon.png" rel="icon">
+    <link href="~/Template/Moderna/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,700,700i&display=swap" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="~/Template/Moderna/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+    <link href="~/Template/Moderna/assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="~/Template/Moderna/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Template/Moderna/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="~/Template/Moderna/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="~/Template/Moderna/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="~/Template/Moderna/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="~/Template/Moderna/assets/css/style.css" rel="stylesheet">
+
+    <!-- =======================================================
+    * Template Name: Moderna
+    * Updated: Sep 18 2023 with Bootstrap v5.3.2
+    * Template URL: https://bootstrapmade.com/free-bootstrap-template-corporate-moderna/
+    * Author: BootstrapMade.com
+    * License: https://bootstrapmade.com/license/
+    ======================================================== -->
+</head>
+
+<body>
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top d-flex align-items-center header-transparent">
+        <div class="container d-flex justify-content-between align-items-center">
+
+            <div class="logo">
+                <h1 class="text-light"><a href="index.html"><span>Yaz</span></a></h1>
+                <!-- Uncomment below if you prefer to use an image logo -->
+                <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+            </div>
+
+            <nav id="navbar" class="navbar">
+                <ul>
+                    <li><a class="active " asp-controller="Yaz" asp-action="Anasayfa">Anasayfa</a></li>
+                    <li><a asp-controller="Yaz" asp-action="Rehabilitasyon">Rehabilitasyon</a></li>
+                    <li><a asp-controller="Yaz" asp-action="Employee">Ekibimiz</a></li>
+                    <li><a asp-controller="Yaz" asp-action="Hakkımızda">Hakkımızda</a></li>
+                    <li><a asp-controller="Yaz" asp-action="iletisim">İletisim</a></li>
+                    <li><a asp-controller="Appointment" asp-action="CreatedAppointment">Randevu</a></li>
+                    <li><a asp-controller="Account" asp-action="Login">Giris Yap</a></li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+
+        </div>
+    </header><!-- End Header -->
+    <!-- ======= Hero Section ======= -->
+    <section id="hero" class="d-flex justify-cntent-center align-items-center">
+        <div id="heroCarousel" class="container carousel carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+
+            <!-- Slide 1 -->
+            <div class="carousel-item active">
+                <div class="carousel-container">
+                    <h2 class="animate__animated animate__fadeInDown">Hoşgeldiniz <span></span></h2>
+                    <p class="animate__animated animate__fadeInUp">Özel Eğitim Merkezimiz, her öğrencinin potansiyelini keşfetmesine ve geliştirmesine yardımcı olmak için burada</p>
+                    <a href="" class="btn-get-started animate__animated animate__fadeInUp">Daha Fazla</a>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon bx bx-chevron-left" aria-hidden="true"></span>
+            </a>
+
+            <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
+                <span class="carousel-control-next-icon bx bx-chevron-right" aria-hidden="true"></span>
+            </a>
+
+        </div>
+    </section><!-- End Hero -->
+
+    <main id="main">
+
+        <!-- ======= Services Section ======= -->
+        <section class="services">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up">
+                        <div class="icon-box icon-box-pink">
+                            <div class="icon"><i class="bx bxl-dribbble"></i></div>
+                            <h4 class="title"><a asp-controller="Yaz" asp-action="FizikTedavi">Fizik Tedavi</a></h4>
+                            <p class="description">Fizik tedavi, vücut fonksiyonlarını iyileştirmek, ağrıyı azaltmak ve yaşam kalitesini artırmak amacıyla fiziksel egzersiz, manuel terapi ve diğer rehabilitasyon yöntemleriyle bireylerin sağlığına destek sağlayan önemli bir tedavi yaklaşımıdır.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+                        <div class="icon-box icon-box-cyan">
+                            <div class="icon"><i class="bx bx-file"></i></div>
+                            <h4 class="title"><a asp-controller="Yaz" asp-action="DilKonusma">Dil Konuşma</a></h4>
+                            <p class="description">Özel eğitim merkezimizde, dil ve konuşma terapileri ile her bireyin iletişim yeteneklerini güçlendirmeye odaklanıyoruz.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+                        <div class="icon-box icon-box-green">
+                            <div class="icon"><i class="bx bx-tachometer"></i></div>
+                            <h4 class="title"><a asp-controller="Yaz" asp-action="DuyuButunleme">Duyu Bütünleme</a></h4>
+                            <p class="description">Duyu bütünleme, duyusal zorlukları olan bireylerin yaşamlarını zenginleştirmek için duyusal uyarıcıları etkili bir şekilde kullanma yoludur.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+                        <div class="icon-box icon-box-blue">
+                            <div class="icon"><i class="bx bx-world"></i></div>
+                            <h4 class="title"><a asp-controller="Yaz" asp-action="Ergoterapi">Ergoterapi</a></h4>
+                            <p class="description">Ergoterapi, günlük yaşam becerilerini geliştirmek ve yaşam kalitesini artırmak için kullanılan etkili bir terapi yöntemidir.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section><!-- End Services Section -->
+        <!-- ======= Why Us Section ======= -->
+        <section class="why-us section-bg" data-aos="fade-up" date-aos-delay="200">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-lg-6 video-box">
+                        <img src="~/images/foto1.jpg" class="img-fluid" alt="">
+                    </div>
+
+                    <div class="col-lg-6 d-flex flex-column justify-content-center p-5">
+
+                        <div class="icon-box">
+                            <div class="icon"><i class="bx bx-fingerprint"></i></div>
+                            <h4 class="title"><a href="">Down Sendromu</a></h4>
+                            <p class="description">Down sendromu, trizomi 21 olarak da bilinen bir genetik bozukluktur.</p>
+                        </div>
+
+                        <div class="icon-box">
+                            <div class="icon"><i class="bx bx-gift"></i></div>
+                            <h4 class="title"><a href=""></a></h4>
+                            <p class="description">Bireylerde zihinsel ve fiziksel gelişimde farklılıklara neden olur</p>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section><!-- End Why Us Section -->
+        <!-- ======= Features Section ======= -->
+        <section class="features">
+            <div class="container">
+
+                <div class="section-title">
+                    <h2>Spina Bifida</h2>
+                    @*<p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>*@
+                </div>
+
+                <div class="row" data-aos="fade-up">
+                    <div class="col-md-5">
+                        <img src="~/images/foto2.jpg" class="img-fluid" alt="">
+                    </div>
+                    <div class="col-md-7 pt-4">
+                        @*<h3>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h3>*@
+                        <p class="fst-italic">
+                            Spina bifida, bir doğum kusuru olan bir tıbbi durumdur. Spina bifida, fetüsün omuriliğinin ve omur kemiğinin doğru bir şekilde gelişmediği bir durumu ifade eder. Bu durum, omuriliğin doğru bir şekilde kaplanmadığı veya korunmadığı bir anlamına gelir. Spina bifida, çoğunlukla bebeklerin sırt bölgesinde, özellikle alt sırt ve bel bölgesinde oluşur.
+
+                            Spina bifida, farklı şiddetlerde olabilir. En ciddi türlerinde, omurilik ve beyin zarları dışarıda kalırken daha hafif türlerinde ise zarların çıkışı olmaz, ancak omurilikte hafif hasarlar meydana gelebilir. Bu durum, çocuğun motor becerilerini, mesane ve bağırsak kontrolünü etkileyebilir.
+
+                            Spina bifida tedavisi genellikle cerrahi müdahale gerektirir. Bebeklerin doğduğunda veya birkaç gün içinde ameliyat olmaları gerekebilir. Tedaviye erken başlanması, komplikasyonları önlemeye yardımcı olabilir.
+                        </p>
+                        @*<ul>
+                            <li><i class="bi bi-check"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
+                            <li><i class="bi bi-check"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
+                        </ul>*@
+                    </div>
+                </div>
+
+                <div class="row" data-aos="fade-up">
+                    <div class="col-md-5 order-1 order-md-2">
+                        <img src="~/images/foto3.jpg" class="img-fluid" alt="">
+                    </div>
+                    <div class="col-md-7 pt-5 order-2 order-md-1">
+                        <h3>Serebral Palsi</h3>
+                        <p class="fst-italic">
+                            Serebral palsi, merkezi sinir sistemi hasarı nedeniyle ortaya çıkan bir grup hareket bozukluğunu ifade eder. Genellikle çocukluk döneminde görülür ve semptomlar kişiden kişiye değişebilir. Tedavi, semptomların yönetilmesini ve yaşam kalitesinin artırılmasını amaçlar ve fizik tedavi, konuşma terapisi ve ilaçlar gibi yöntemleri içerebilir.
+                        </p>
+                        @*<p>
+                            Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+                            velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                            culpa qui officia deserunt mollit anim id est laborum
+                        </p>*@
+                    </div>
+                </div>
+
+                <div class="row" data-aos="fade-up">
+                    <div class="col-md-5">
+                        <img src="~/images/foto4.jpg" class="img-fluid" alt="">
+                    </div>
+                    <div class="col-md-7 pt-5">
+                        <h3>Hemipleji</h3>
+                        <p>
+                            Hemipleji, genellikle bir inme sonucu ortaya çıkar. İnme, beyin kanaması veya kan damarının tıkanması gibi nedenlerle beyin kan akışının bozulması sonucu gelişebilir.
+                    Hemiplejiye sahip bir kişi, felç olan tarafının vücut hareketlerini kısmen veya tamamen kaybedebilir. Bu durum, yürüme, kolları kullanma ve diğer vücut hareketlerini etkileyebilir. Hemiplejik felç, genellikle vücudun bir tarafında zayıflık veya tamamen felç olma şeklinde kendini gösterir.
+                        </p>
+                    </div>
+                </div>           
+            </div>
+        </section><!-- End Features Section -->
+
+    </main><!-- End #main -->
+    <!-- ======= Footer ======= -->
+    <footer id="footer" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
+
+     
+
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-3 col-md-6 footer-links">
+                        <h4>Yaz Rehabilitasyon</h4>
+                        <ul>
+                            <li><i class="bx bx-chevron-right"></i> <a asp-controller="Yaz" asp-action="Anasayfa">Anasayfa</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a asp-controller="Yaz" asp-action="Rehabilitasyon">Rehabilitasyon</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a asp-controller="Yaz" asp-action="Employee">Ekibimiz</a></li>
+                          
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-links">
+                        <h4>Yaz Rehabilitasyon</h4>
+                        <ul>
+                            <li><i class="bx bx-chevron-right"></i> <a asp-controller="Yaz" asp-action="Hakkımızda">Hakkımızda</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a asp-controller="Yaz" asp-action="iletisim">İletişim</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Randevu</a></li>
+                           
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-contact">
+                        <h4>Bize Ulaşın</h4>
+                        <p>
+                            Avcılar <br>
+                            İstanbul<br>
+                            Türkiye <br><br>
+                            <strong>Telefon:</strong> 0212 111 11 11<br>
+                            <strong>Email:</strong> baris_aydogan_36@hotmail.com<br>
+                        </p>
+
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-info">
+                        <h3>Yaz Rehabilitasyon</h3>
+                       @* <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta donna mare fermentum iaculis eu non diam phasellus.</p>*@
+                        <div class="social-links mt-3">
+                            <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                            <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                            <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                            <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="copyright">
+                 <strong><span>Yaz Rehabilitasyon</span></strong>.
+            </div>
+            <div class="credits">
+                <!-- All the links in the footer should remain intact. -->
+                <!-- You can delete the links only if you purchased the pro version. -->
+                <!-- Licensing information: https://bootstrapmade.com/license/ -->
+                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/free-bootstrap-template-corporate-moderna/ -->
+                Designed by <a href="#">Barış Aydoğan</a>
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Vendor JS Files -->
+    <script src="~/Template/Moderna/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="~/Template/Moderna/assets/vendor/aos/aos.js"></script>
+    <script src="~/Template/Moderna/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Template/Moderna/assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="~/Template/Moderna/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="~/Template/Moderna/assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="~/Template/Moderna/assets/vendor/waypoints/noframework.waypoints.js"></script>
+    <script src="~/Template/Moderna/assets/vendor/php-email-form/validate.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="~/Template/Moderna/assets/js/main.js"></script>
+
+</body>
+
+</html>

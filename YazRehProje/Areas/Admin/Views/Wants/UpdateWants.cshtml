@@ -1,0 +1,60 @@
+﻿@model Entities.DTO.WantsDto.WantsUpdateDto
+@{
+    ViewData["Title"] = "UpdateWants";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1 class="fw-bolder text-center " style="color:darkred">İstek Cevap Ekleme</h1>
+
+@*@if (ViewBag.UpdateError != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.UpdateError
+    </div>
+}*@
+@*else
+{*@
+    <form asp-area="Admin" asp-controller="Wants" asp-action="UpdateWants" method="post" >
+
+        <input type="hidden" asp-for="WantsId" />
+        <div class="mb-3">
+            <label class="form-label"> Tanım</label>
+            <input type="text" class="form-control" asp-for="Explanation" value="@Model.Explanation">
+        <span asp-validation-for="Explanation" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label"> Açıklama</label>
+            <input type="text" class="form-control" asp-for="Description" value="@Model.Description">
+        <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label"> Durum</label>
+            <input type="text" class="form-control" asp-for="Conclusion" value="@Model.Conclusion">
+        </div>
+
+        <button type="submit" class="btn btn-primary"><i class="fa fa-check" aria-hidden="true"></i>     Gönder</button>
+    </form>
+@*}*@
+
+
+            @section Scripts {
+     <script>
+         ﻿
+    let isSubmitting = false;
+
+    // Tüm form elementlerini seçin ve submit olayını dinleyin
+    const forms = document.querySelectorAll("form");
+    forms.forEach(function (form) {
+        form.addEventListener("submit", function (e) {
+            if (isSubmitting) {
+                e.preventDefault();
+            } else {
+                isSubmitting = true;
+                // İşlem devam ediyor...
+            }
+        });
+    });
+     </script>
+}

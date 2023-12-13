@@ -1,0 +1,86 @@
+﻿@*@model IEnumerable<Appointment>*@
+@{
+    ViewData["Title"] = "CreatedAppointment";
+    Layout = "~/Views/SharedNew/_Layout.cshtml";
+}
+
+@*<h1 class="fw-bolder text-center " style="color:darkred">Randevu Alma</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Tarih</th>
+            <th scope="col">Saat</th>
+            <th scope="col">Ad</th>
+            <th scope="col">Soyad</th>
+            <th scope="col">Boş Mu</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            if(item.BosDolu){
+                    <tr >
+                <th scope="row">@item.AppointmentId</th>
+                <td>@item.AppointmentDate.ToShortDateString()</td>
+                <td >
+                    <input type="time" value=@item.AppointmentTime disabled/> 
+                </td>
+                <td>@item.StudentName</td>
+                <td>@item.StudentSurname</td>
+                @if (item.BosDolu == true)
+                    {
+                    <td>Boş</td>
+                }
+                else
+                {
+                    <td>Dolu</td>
+                }
+                </tr>
+            }
+            else
+            {
+                
+            }
+
+            
+        }
+
+
+    </tbody>
+</table>
+
+@section Scripts {
+     <script>
+         ﻿
+    let isSubmitting = false;
+
+    // Tüm form elementlerini seçin ve submit olayını dinleyin
+    const forms = document.querySelectorAll("form");
+    forms.forEach(function (form) {
+        form.addEventListener("submit", function (e) {
+            if (isSubmitting) {
+                e.preventDefault();
+            } else {
+                isSubmitting = true;
+                // İşlem devam ediyor...
+            }
+        });
+    });
+     </script>
+}*@
+
+     <div class="container-fluid d-flex align-items-center justify-content-center vh-100">
+    <div class="text-center">
+        <h1 class="display-3 fw-bold text-danger">Hoşgeldiniz</h1>
+        <p class="lead">Randevu listesini görmek ve randevu almak için lütfen sisteme giriş yapınız.</p>
+        <a asp-controller="Account" asp-action="Login" class="btn btn-primary btn-lg">Giriş Sayfasına Git</a>
+    </div>
+</div>
+
+<script>
+    setTimeout(function () {
+        window.location.href = '/Account/Login'; // Yönlendirilecek sayfa URL'sini buraya ekleyin
+    }, 10000); // 10 saniye (10000 milisaniye)
+</script>

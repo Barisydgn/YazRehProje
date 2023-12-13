@@ -1,0 +1,33 @@
+﻿@model ConfirmMailDto
+@{
+    ViewData["Title"] = "ConfirmMail";
+    Layout = "~/Views/SharedNew/_Layout.cshtml";
+}
+
+<h1 class="fw-bolder text-center " style="color:darkred">Lütfen Hesabınızı Aktifleştiriniz</h1>
+
+<h2>Taşınan Mail Adresi @TempData["Mail"]</h2>
+
+<div class="container ">
+    <div class="row justify-content-center">
+    <div class="col-md-4">
+            <form asp-controller="Account" asp-action="ConfirmMail" method="post">
+                 <div class="form-group">
+                    <label>Mail Adresi </label>
+                    <input type="hidden" asp-for="Mail" class="form-control" value="@TempData["Mail"]"><br />
+
+                </div>
+                <input type="hidden" asp-for="Code" class="form-control"  value="@TempData["Code"]" />
+
+                <div class="form-group">
+                    <label>Lütfen Mail Adresinize Gelen 6 Haneli Kodu Giriniz </label>
+                    <input type="text" class="form-control" asp-for="UserCode" ><br />
+                    <span asp-validation-for="Mail" class="text-danger"></span>
+                </div>
+
+                <button class="btn btn-primary">Hesabı Aktifleştir</button>
+            </form>
+    </div>
+  </div>
+</div>
+
