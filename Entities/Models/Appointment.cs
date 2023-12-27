@@ -14,6 +14,7 @@ namespace Entities.Models
         public string StudentName { get; set; }
         public string StudentSurname { get; set; }
         public bool BosDolu { get; set; }
+        public bool Paid { get; set; }
         //public int EmployeeId { get; set; }
         //public Employee Employee { get; set; }
 

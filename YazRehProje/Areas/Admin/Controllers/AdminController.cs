@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using AutoMapper;
 using Entities.DTO.EmployeeDto;
 using Entities.Enums;
 using Entities.Models;
@@ -19,14 +20,16 @@ namespace YazRehProje.Areas.Admin.Controllers
         private readonly IFileProvider _fileProvider;
         private readonly IServiceManager _manager;
         private readonly IMapper _mapper;
+        public INotyfService _notifyService { get; }
         private readonly SignInManager<IdentityUser> _signInManager;
 
-        public AdminController(IFileProvider fileProvider, IServiceManager manager, IMapper mapper, SignInManager<IdentityUser> signInManager)
+        public AdminController(IFileProvider fileProvider, IServiceManager manager, IMapper mapper, SignInManager<IdentityUser> signInManager, INotyfService notifyService)
         {
             _fileProvider = fileProvider;
             _manager = manager;
             _mapper = mapper;
             _signInManager = signInManager;
+            _notifyService = notifyService;
         }
 
         public IActionResult Anasayfa()
@@ -63,9 +66,11 @@ namespace YazRehProje.Areas.Admin.Controllers
                 if (employeeCreateDto is not null)
                 {
                     _manager.EmployeeServices.CreateOneEmployee(employeeCreateDto);
+                    _notifyService.Success("Başarılı");
                     return View("List", _manager.EmployeeServices.GetAllEmployee(true));
                 }
             }
+            _notifyService.Error("Başarısız");
             ViewBag.Error = "Kayıt Yaparken Hata Oluştu";
             return View(employeeCreateDto);
         }
@@ -74,6 +79,7 @@ namespace YazRehProje.Areas.Admin.Controllers
         public IActionResult DeleteEmployee(int id)
         {
            _manager.EmployeeServices.DeleteOneEmployee(id,trackChanges:true);
+            _notifyService.Success("Başarılı");
             return View("List",_manager.EmployeeServices.GetAllEmployee(true));
         }
 
@@ -101,11 +107,13 @@ namespace YazRehProje.Areas.Admin.Controllers
                 {
                     //var employedto = _mapper.Map<Entities.Models.Employee>(employeeUpdateDto);
                     _manager.EmployeeServices.UpdateOneEmployee(employeeUpdateDto, employeeUpdateDto.EmployeeId, trackChanges: true);
-                    return View("List", _manager.EmployeeServices.GetAllEmployee(true));
+                _notifyService.Success("Başarılı");
+                return View("List", _manager.EmployeeServices.GetAllEmployee(true));
                 }
             //}
             ViewBag.UpdateError = "Güncelleme Yaparken Hata Oluştu";
-           
+            _notifyService.Error("Başarısız");
+
             return View(new EmployeeUpdateDto
             {
                 Name= employeeUpdateDto.Name,

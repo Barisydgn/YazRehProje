@@ -54,7 +54,8 @@ namespace Services.Services.ScheduledJobServices
                     AppointmentTime =TimeSpan.FromHours(10 + i),
                     StudentName = " ",
                     StudentSurname = " ",
-                    BosDolu = true
+                    BosDolu = true,
+                    Paid=false
                 };
 
                 randevuListesi.Add(randevu);

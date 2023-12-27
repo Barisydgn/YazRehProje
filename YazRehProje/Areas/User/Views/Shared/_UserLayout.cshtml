@@ -198,10 +198,10 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a asp-area="User" asp-controller="Appointment" asp-action="" class="nav-link">
+                            <a asp-area="User" asp-controller="Payment" asp-action="Index" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
-                                    Randevularım
+                                    Ödeme
                                     <span class="right badge badge-danger">New</span>
                                 </p>
                             </a>
@@ -313,7 +313,8 @@
 
     <!-- jQuery UI kütüphanesi -->
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    @await RenderSectionAsync("scripts")
+    @await RenderSectionAsync("scripts", required: false)
+    @await Component.InvokeAsync("Notyf")
 </body>
 </html>
 

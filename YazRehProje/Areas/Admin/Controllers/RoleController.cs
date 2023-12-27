@@ -1,4 +1,5 @@
-﻿using Entities.DTO.UserDto;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Entities.DTO.UserDto;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -17,12 +18,14 @@ namespace YazRehProje.Areas.Admin.Controllers
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly YazContext _context;
+        public INotyfService _notifyService { get; }
 
-        public RoleController(RoleManager<IdentityRole> roleManager, UserManager<IdentityUser> userManager, YazContext context)
+        public RoleController(RoleManager<IdentityRole> roleManager, UserManager<IdentityUser> userManager, YazContext context, INotyfService notifyService)
         {
             _roleManager = roleManager;
             _userManager = userManager;
             _context = context;
+            _notifyService = notifyService;
         }
 
         //USERLARI LİSTELİYOR
@@ -84,9 +87,10 @@ namespace YazRehProje.Areas.Admin.Controllers
             var result = _userManager.AddToRoleAsync(user,userRoleDto2.roleName);
             if (result.Result.Succeeded)
             {
+                _notifyService.Success("Başarılı");
                 return RedirectToAction("Index", "Role", new { area = "Admin" });
             }
-
+            _notifyService.Error("Başarısız");
             return View();
         }
 

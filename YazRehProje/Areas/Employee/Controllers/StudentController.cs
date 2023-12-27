@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using AutoMapper;
 using Entities.DTO.StudentDto;
 using Entities.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -18,14 +19,15 @@ namespace YazRehProje.Areas.Employee.Controllers
         private readonly IMapper _mapper;
         private readonly IRepositoryManager _repo;
         private readonly YazContext _context;
+        public INotyfService _notifyService { get; }
 
-
-        public StudentController(IServiceManager manager, IMapper mapper, YazContext context, IRepositoryManager repo)
+        public StudentController(IServiceManager manager, IMapper mapper, YazContext context, IRepositoryManager repo, INotyfService notifyService)
         {
             _manager = manager;
             _mapper = mapper;
             _context = context;
             _repo = repo;
+            _notifyService = notifyService;
         }
 
         public IActionResult List()
@@ -61,10 +63,12 @@ namespace YazRehProje.Areas.Employee.Controllers
                 if (studentUpdateDto != null)
                 {
                     _manager.StudentServices.UpdateOneStudent(studentUpdateDto, studentUpdateDto.StudentId, true);
+                    _notifyService.Success("Başarılı");
                     return View("List", _manager.StudentServices.GetAllStudent(trackChanges: true));
                 }
             }
             ViewBag.UpdateError = "Güncelleme Yaparken Hata Oluştu";
+            _notifyService.Error("Başarısız");
             var employee = _context.Employees.ToList();
             return View(new StudentUpdateDto
             {

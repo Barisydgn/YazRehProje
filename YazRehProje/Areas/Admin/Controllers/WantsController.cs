@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using AutoMapper;
 using Entities.DTO.WantsDto;
 using Entities.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -15,11 +16,13 @@ namespace YazRehProje.Areas.Admin.Controllers
     {
         private readonly IServiceManager _manager;
         private readonly IMapper _mapper;
+        public INotyfService _notifyService { get; }
 
-        public WantsController(IServiceManager manager, IMapper mapper)
+        public WantsController(IServiceManager manager, IMapper mapper, INotyfService notifyService)
         {
             _manager = manager;
             _mapper = mapper;
+            _notifyService = notifyService;
         }
 
         //LİSTELEME ve SİLME YAPILDI GÜNCELLEME   KALDI EKLEME İSE EMPLOYEE AREASINDA OLACAK
@@ -55,10 +58,12 @@ namespace YazRehProje.Areas.Admin.Controllers
                 if (wantsUpdateDto is not null)
                 {
                     _manager.WantServices.UpdateOneWants(wantsUpdateDto, wantsUpdateDto.WantsId, trackChanges: true);
+                    _notifyService.Success("Başarılı");
                     return View("List", _manager.WantServices.GetAllWants(true));
                 }
             }
             ViewBag.UpdateError = "Güncelleme Yaparken Hata Oluştu";
+            _notifyService.Error("Başarısız");
             return View(new WantsUpdateDto
             {
                 WantsId = wantsUpdateDto.WantsId,

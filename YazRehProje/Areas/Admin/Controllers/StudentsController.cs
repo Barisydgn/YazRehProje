@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using AutoMapper;
 using Entities.DTO.StudentDto;
 using Entities.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -19,14 +20,15 @@ namespace YazRehProje.Areas.Admin.Controllers
         private readonly IMapper _mapper;
         private readonly IRepositoryManager _repo;
         private readonly YazContext _context;
+        public INotyfService _notifyService { get; }
 
-
-        public StudentsController(IServiceManager manager, IMapper mapper, YazContext context, IRepositoryManager repo)
+        public StudentsController(IServiceManager manager, IMapper mapper, YazContext context, IRepositoryManager repo, INotyfService notifyService)
         {
             _manager = manager;
             _mapper = mapper;
             _context = context;
             _repo = repo;
+            _notifyService = notifyService;
         }
 
         public IActionResult List() 
@@ -60,6 +62,7 @@ namespace YazRehProje.Areas.Admin.Controllers
                 if (studentCreateDto2 != null)
                 {
                     _manager.StudentServices.CreateOneStudent(studentCreateDto2);
+                _notifyService.Success("Başarılı");
                     return View("List", _manager.StudentServices.GetAllStudent(trackChanges: true));
                 }
 
@@ -67,12 +70,14 @@ namespace YazRehProje.Areas.Admin.Controllers
 
             var employee = _context.Employees.ToList();
             ViewBag.AddError = "Ekleme Yaparken Hata Oluştu";
+            _notifyService.Error("Başarısız");
             return View(new StudentCreateDto2 { Employees = employee });
         }
 
         public IActionResult DeleteStudent(int id)
         {
             _manager.StudentServices.DeleteOneStudent(id,trackChanges: true);
+           
             return View("List",_manager.StudentServices.GetAllStudent(trackChanges : true));
         }
 
@@ -103,11 +108,13 @@ namespace YazRehProje.Areas.Admin.Controllers
                 if (studentUpdateDto != null)
                 {
                     _manager.StudentServices.UpdateOneStudent(studentUpdateDto, studentUpdateDto.StudentId, true);
-                    return View("List", _manager.StudentServices.GetAllStudent(trackChanges: true));
+                _notifyService.Success("Başarılı");
+                return View("List", _manager.StudentServices.GetAllStudent(trackChanges: true));
                 }
             //}
             var employee = _context.Employees.ToList();
             ViewBag.UpdateError = "Güncelleme Yaparken Hata Oluştu";
+            _notifyService.Error("Başarısız");
             return View(new StudentUpdateDto
             {
                 StudentId = studentUpdateDto.StudentId,

@@ -301,6 +301,7 @@
     <!-- AdminLTE for demo purposes -->
     <script src="~/Template/AdminLTE-3.0.4/dist/js/demo.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
+    @await Component.InvokeAsync("Notyf")
 </body>
 </html>
 

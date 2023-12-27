@@ -4,6 +4,7 @@ using Entities.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
@@ -16,6 +17,7 @@ using Repositories.Repositories.Repositories.StudentRepo;
 using Repositories.Repositories.Repositories.WantRepo;
 
 using Services.Services.EmployeeServices;
+using Services.Services.PaymentServices;
 using Services.Services.ScheduledJobServices;
 using Services.Services.ServiceManager;
 using Services.Services.StudentServices;
@@ -47,6 +49,10 @@ namespace YazRehProje.Extensions
             //services.AddScoped(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
             services.AddScoped<IScopedService, ScopedService>();
             services.AddSingleton<IFileProvider>(new PhysicalFileProvider(Directory.GetCurrentDirectory()));//FOTOĞRAF EKLEME
+
+
+           
+            services.AddScoped<IPaymentService, PaymentService>(); // IPaymentService ve StripePaymentService örnek bir servis ve servis arayüzüdür.
             return services;
         }
     

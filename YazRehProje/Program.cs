@@ -1,9 +1,13 @@
 
+using AspNetCoreHero.ToastNotification;
+using AspNetCoreHero.ToastNotification.Extensions;
+using Entities.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Repositories.Context;
 using Repositories.Repositories.Repositories.BaseRepo;
+using Stripe;
 using System.Configuration;
 using System.Globalization;
 using System.Reflection;
@@ -33,9 +37,10 @@ builder.Services.AddInfrastructure();
 //}); 
 #endregion
 builder.Services.ConfigureIdentity();
-
+builder.Services.AddNotyf(config => { config.DurationInSeconds = 10; config.IsDismissable = true; config.Position = NotyfPosition.BottomRight; });
 //builder.Services.ConfigureJwt(builder.Configuration);
 builder.Services.AddScoped<Randevu>();
+builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
 
 
 
@@ -57,11 +62,10 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
-
-//app.UseStatusCodePagesWithReExecute("/Error/ErrorPage", "?code={0}");
+app.UseStatusCodePagesWithRedirects("/Error/ErrorPage?statusCode={0}");
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
+app.UseNotyf();
 app.UseRouting();
 //app.UseSession();
 

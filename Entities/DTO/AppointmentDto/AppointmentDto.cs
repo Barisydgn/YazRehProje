@@ -22,5 +22,6 @@ namespace Entities.DTO.AppointmentDto
         [StringLength(50, ErrorMessage = "Soyad En Fazla 50 Karakter Olabilir")]
         public string StudentSurname { get; set; }
         public bool BosDolu { get; set; }
+        public bool Paid { get; set; }
     }
 }

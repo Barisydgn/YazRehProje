@@ -1,4 +1,5 @@
-﻿using Entities.DTO.WantsDto;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Entities.DTO.WantsDto;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services.Services.ServiceManager;
@@ -11,17 +12,19 @@ namespace YazRehProje.Areas.Employee.Controllers
     public class WantsController : Controller
     {
         private readonly IServiceManager _manager;
+        public INotyfService _notifyService { get; }
 
-        public WantsController(IServiceManager manager)
+        public WantsController(IServiceManager manager, INotyfService notifyService)
         {
             _manager = manager;
+            _notifyService = notifyService;
         }
-
+      
         public IActionResult AddWants()
         {
             return View();
         }
-
+   
         [HttpPost]
         public IActionResult AddWants(WantsCreateDto wantsCreateDto)
         {
@@ -31,10 +34,12 @@ namespace YazRehProje.Areas.Employee.Controllers
                 {
                     _manager.WantServices.CreateOneWants(wantsCreateDto);
                     ViewBag.Add = "Ekleme Başarılı Oldu";
+                    _notifyService.Success("Başarılı");
                     return View();
                 }
             }
             ViewBag.AddError = "İstek Eklerken Hata Oluştu";
+            _notifyService.Error("Başarısız");
             return View();
         }
     }
