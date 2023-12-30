@@ -75,86 +75,19 @@ namespace YazRehProje.Areas.User.Controllers
             _context = context;
             _notifyService = notifyService;
         }
-        //public IActionResult Index()
-        //{
+      
+     
 
 
-        //    return View();
-        //}
-
-        //[AllowAnonymous]
-        //[HttpGet]
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
-
-
-        //[HttpPost]
-        
-        public IActionResult Index(int appointmentId)
-        {
-            TempData["appointmentId"] = appointmentId;
-            //var paymentResponse = ViewData["PaymentResponse"] as string;
-            var myViewModel = new PaymentViewModel
-            {
-                PublishableKey = "pk_test_51OMxHDEGXWDAglRnPYbAKT6cJCRX6JF61KpXepANQ2YArNFCfzs8UDiNUPOAKva6ibYAj4G3PLodJF2StSbyjmtZ00WDpKkQ8w",
-               AppointmentId= appointmentId
-            };
-
-
-            return View(myViewModel);
-        }
-
-
-        [HttpGet]
-        public IActionResult StripeWebhook()
-        {
-            // Stripe webhook'unu işleyin ve ödeme durumunu kontrol edin
-            var json = string.Empty;
-
-            using (var reader = new StreamReader(HttpContext.Request.Body))
-            {
-                json = reader.ReadToEnd();
-            }
-
-            var stripeEvent = EventUtility.ConstructEvent(json, Request.Headers["Stripe-Signature"], "whsec_duahTEv7vkODGQGmoSfOFV4dVFzTNmU2");
-
-            // Stripe'dan gelen olayı kontrol edin
-            if (stripeEvent.Type == Events.PaymentIntentSucceeded)
-            {
-                // Ödeme başarılı, gerekli işlemleri gerçekleştirin
-                // Bu noktada gelen bilgilere göre ödemenin başarılı olduğunu anlamış olursunuz.
-                // Örneğin: var paymentIntentId = stripeEvent.Data.Object.Id;
-
-                var appointmentId = HttpContext.Request.Query["appointmentId"];
-               if(!string.IsNullOrEmpty(appointmentId))
-                {
-                    var appointment = _context.Appointments.Find(appointmentId);
-                    appointment.Paid = true;
-                    _context.Appointments.Update(appointment);
-                    _context.SaveChanges();
-                }
-                
-            }
-            else if (stripeEvent.Type == Events.PaymentIntentPaymentFailed)
-            {
-                // Ödeme başarısız, gerekli işlemleri gerçekleştirin
-                // Bu noktada gelen bilgilere göre ödemenin başarısız olduğunu anlamış olursunuz.
-                // Örneğin: var paymentIntentId = stripeEvent.Data.Object.Id;
-            }
-
-            return Ok();
-        }
-
+      
 
 
         [HttpPost]
-        public async Task<IActionResult> CreateCheckoutSession([FromBody] PaymentViewModel model)
+        public async Task<IActionResult> CreateCheckoutSession(int appointmentId)
         {
             var option = new SessionCreateOptions
             {
-                SuccessUrl = $"https://localhost:7144/user/payment/success?id={model.AppointmentId}",
+                SuccessUrl = $"https://localhost:7144/user/payment/success?id={appointmentId}",
                 CancelUrl = "https://localhost:7144/user/payment/failure",
                 PaymentMethodTypes = new List<string> { "card" },
                 Mode = "payment", // Tek seferlik ödeme modu
@@ -170,15 +103,9 @@ namespace YazRehProje.Areas.User.Controllers
             var service = new SessionService();
             try
             {
-                var session = await service.CreateAsync(option);
-                //ViewData["PaymentResponse"] = session.Url;
-                return Ok(new PaymentResponse
-                {
-                    SessionId = session.Id,
-                    Url = session.Url
+                var session = await service.CreateAsync(option);              
+                return Redirect(session.Url);
 
-                });
-                
             }
             catch (StripeException ex)
             {
@@ -188,55 +115,7 @@ namespace YazRehProje.Areas.User.Controllers
             
         }
 
-        //[AllowAnonymous]
-        //[HttpGet]
-        //public IActionResult Success()
-        //{
-        //    #region Hata
-        //    //if (TempData["appointmentId"] != null)
-        //    //{
-        //    //    var appointmentId = (int)TempData["appointmentId"];
-        //    //    TempData.Keep("appointmentId"); // Silinmesini engelle
-        //    //    var appointment=    _context.Appointments.Where(x => x.AppointmentId == appointmentId).FirstOrDefault();
-        //    //    appointment.Paid = true;
-        //    //    _context.Appointments.Update(appointment);
-        //    //    _context.SaveChanges();
-        //    //}
-
-        //    //if (TempData.ContainsKey("appointmentId"))
-        //    //{
-        //    //    var appointmentId = (int)TempData["appointmentId"];
-        //    //    TempData.Keep("appointmentId"); // Değeri bir sonraki istek için sakla
-
-        //    //    // Şimdi ihtiyacınıza göre appointmentId'yi kullanabilirsiniz
-        //    //    var appointment = _context.Appointments.FirstOrDefault(x => x.AppointmentId == appointmentId);
-        //    //    if (appointment != null)
-        //    //    {
-        //    //        appointment.Paid = true;
-        //    //        _context.Appointments.Update(appointment);
-        //    //        _context.SaveChanges();
-        //    //    }
-
-        //    //    // Gerekirse appointmentId'yi Success view'ına geçirebilirsiniz
-        //    //    ViewBag.AppointmentId = appointmentId;
-
-        //    //    return View();
-        //    //}
-
-        //    #endregion
-
-        //    var appointment = _context.Appointments.Where(x => x.AppointmentId == id).FirstOrDefault();
-        //    if (appointment != null)
-        //    {
-        //        appointment.Paid = true;
-        //        _context.Appointments.Update(appointment);
-        //        _context.SaveChanges();
-        //    }
-
-
-        //    return View();
-        //}
-
+       
 
 
     
@@ -277,33 +156,10 @@ namespace YazRehProje.Areas.User.Controllers
 
             return View();
         }
-
-      
-        //[HttpPost]
-        //public IActionResult Success()
-        //{
-        //    // Form submit edildiğinde gelen appointmentId'yi kullanarak işlem yapabilirsiniz
-        //    //var appointment = _context.Appointments.FirstOrDefault(x => x.AppointmentId == id);
-        //    //if (appointment != null)
-        //    //{
-        //    //    appointment.Paid = true;
-        //    //    appointment.BosDolu= false;
-        //    //    _context.Appointments.Update(appointment);
-        //    //    _context.SaveChanges();
-        //    //}
-
-        //    return View();
-        //}
-
-
         public IActionResult Failure()
         {
             _notifyService.Error("Başarısız");
             return View();
         }
-
-
-
-
     }
 }

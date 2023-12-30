@@ -92,8 +92,6 @@ namespace YazRehProje.Controllers
         [HttpPost]
         public async Task<IActionResult> RegisterUser( UserForRegistrationDto userForRegistrationDto)
         {
-
-
             #region Doğru Kod
             //if (ModelState.IsValid)
             //{
@@ -140,9 +138,6 @@ namespace YazRehProje.Controllers
             //return View();
             #endregion
 
-            //if (ModelState.IsValid)
-            //{
-
             if (ModelState.IsValid)
             {
                 var existingUserByEmail = await _register.FindByEmailAsync(userForRegistrationDto.Email);
@@ -159,8 +154,6 @@ namespace YazRehProje.Controllers
                     ModelState.AddModelError("", "Bu kullanıcı adı zaten kullanılıyor.");
                     return View();
                 }
-
-
                 Random random = new Random();
                 int code;
                 code = random.Next(100000, 1000000);
@@ -224,9 +217,6 @@ namespace YazRehProje.Controllers
             }
             return View();
         }
-
-
-
         //ŞİFRE SIFIRLAMA
         [HttpGet]
        public IActionResult ResetPassword()

@@ -33,7 +33,6 @@ namespace YazRehProje.Areas.Admin.Controllers
 
         public IActionResult List() 
         {
-            //ÖĞRENCİLİK DURUMU AKTİF VEYA DEĞİL İÇERİĞİ DE YAP
             #region Bağlantılı Tablo Normal Kodlama
             //BUNU N KATMANLIYA ÇEVİRMEK İÇİN  STUDENT REPO KISMINA BAK ORAYA EKLEDİM ONU DENE
             // var students = _context.Students.Include(x => x.Employee).ToList();
@@ -53,21 +52,12 @@ namespace YazRehProje.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult AddStudent(StudentCreateDto2 studentCreateDto2)
         {
-            //MODELSTATE HATA VERİYOR NASIL ÇÖZÜCEZ ACABA
-
-           
-            //if (ModelState.IsValid )
-            //{
-                
                 if (studentCreateDto2 != null)
                 {
                     _manager.StudentServices.CreateOneStudent(studentCreateDto2);
                 _notifyService.Success("Başarılı");
                     return View("List", _manager.StudentServices.GetAllStudent(trackChanges: true));
                 }
-
-            //}
-
             var employee = _context.Employees.ToList();
             ViewBag.AddError = "Ekleme Yaparken Hata Oluştu";
             _notifyService.Error("Başarısız");
@@ -103,15 +93,12 @@ namespace YazRehProje.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult UpdateStudent(StudentUpdateDto studentUpdateDto)
         {
-            //if (ModelState.IsValid)
-            //{
                 if (studentUpdateDto != null)
                 {
                     _manager.StudentServices.UpdateOneStudent(studentUpdateDto, studentUpdateDto.StudentId, true);
                 _notifyService.Success("Başarılı");
                 return View("List", _manager.StudentServices.GetAllStudent(trackChanges: true));
                 }
-            //}
             var employee = _context.Employees.ToList();
             ViewBag.UpdateError = "Güncelleme Yaparken Hata Oluştu";
             _notifyService.Error("Başarısız");

@@ -8,7 +8,7 @@ using Services.Services.ServiceManager;
 
 namespace YazRehProje.Areas.Admin.Controllers
 {
-    //[Authorize]
+    
     [Area("Admin")]
     [Authorize(Roles = "Admin")]
 
@@ -25,7 +25,7 @@ namespace YazRehProje.Areas.Admin.Controllers
             _notifyService = notifyService;
         }
 
-        //LİSTELEME ve SİLME YAPILDI GÜNCELLEME   KALDI EKLEME İSE EMPLOYEE AREASINDA OLACAK
+       
         public IActionResult List()
         {
             return View(_manager.WantServices.GetAllWants(trackChanges : true));

@@ -28,7 +28,6 @@ namespace YazRehProje.Areas.Admin.Controllers
             _notifyService = notifyService;
         }
 
-        //USERLARI LİSTELİYOR
         public async Task<IActionResult> Index()
         {
             var usersWithRoles = new List<Entities.DTO.UserDto.UserRoleDto>();
@@ -110,16 +109,10 @@ namespace YazRehProje.Areas.Admin.Controllers
                     UserName = user.Result.UserName,
                     Roles = roles.Result.ToList()
                 };
-
                 return View(model);
-            }
-
-            
-
+          }
             return View();
         }
-
-
         [HttpPost]       
         public async Task<IActionResult> DeleteRol(DeleteRoleDto deleteRoleDto)
         {
@@ -132,7 +125,6 @@ namespace YazRehProje.Areas.Admin.Controllers
                 }
                 else
                 {
-                    
                     var result = await _userManager.RemoveFromRoleAsync(user, deleteRoleDto.RoleId);
                     if(result.Succeeded)
                     {

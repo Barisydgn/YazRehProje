@@ -13,7 +13,7 @@ namespace YazRehProje.Areas.User.Controllers
 {
     [Area("User")]
     [Authorize(Roles = "User")]
-    //STRİPE İLE ÖDEME YÖNTEMLERİNİ EKLE
+
     public class AppointmentController : Controller
     {
         private readonly UserManager<IdentityUser> _userManager;
@@ -53,9 +53,6 @@ namespace YazRehProje.Areas.User.Controllers
         [HttpPost]
         public IActionResult CreateAppointment(AppointmentDto AppointmentDto)
         {
-            //if (ModelState.IsValid)
-            //{
-            
               if(AppointmentDto is not null)
             {
                 var appointment = _mapper.Map<Appointment>(AppointmentDto);
@@ -66,8 +63,6 @@ namespace YazRehProje.Areas.User.Controllers
             }
             _notifyService.Error("Başarısız");
             return RedirectToAction("List", _context.Appointments.ToList());
-            //}
-            //return View(AppointmentDto);
         }
 
         public IActionResult Index()
@@ -76,60 +71,15 @@ namespace YazRehProje.Areas.User.Controllers
         }
 
 
-        public JsonResult Ajax(string selectedDate)
+        public IActionResult Ajax(string selectedDate)
         {
-
             DateTime date = DateTime.Parse(selectedDate);
-            var filteredAppointments = _context.Appointments.Where(x => x.AppointmentDate.Date==date && x.Paid==false).ToList();
-            var json = JsonConvert.SerializeObject(filteredAppointments);
-
-            return Json(json);
+            var filteredAppointments = _context.Appointments.Where(x => x.AppointmentDate.Date==date && x.Paid==false ).ToList();
+            return PartialView("_AppointmentPartial", filteredAppointments);
         }
-
-
-
-        //NAMEAJAX VE MYAPPOİNTMENTS KISMI HATALI BUNA BAK
-        public JsonResult NameAjax(string search)
-        {
-            var singleAppointment = _context.Appointments.FirstOrDefault(x => x.StudentName == search);
-
-            var json = JsonConvert.SerializeObject(singleAppointment);
-            return Json(json);
-        }
-
-
-       
         public IActionResult List()
         {
-           return View(_context.Appointments.ToList());
+           return View();
         }
-
-      
-        
-
-        [HttpGet]
-        public IActionResult MyAppointments(string search)
-        {
-            var appointment = _context.Appointments.FirstOrDefault(x => x.StudentName == search);
-
-            if (appointment != null)
-            {
-                return View(appointment);
-            }
-            else
-            {
-                // Eğer belirli bir öğrenci adına ait randevu bulunamazsa, uygun bir mesajı göster
-                ViewBag.ErrorMessage = $"'{search}' adına ait randevu bulunamadı.";
-                return View();
-            }
-           
-        }
-
-
-
-       
-
-
-
     }
 }

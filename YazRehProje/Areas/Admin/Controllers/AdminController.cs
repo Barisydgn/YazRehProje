@@ -94,8 +94,6 @@ namespace YazRehProje.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult UpdateEmployee(EmployeeUpdateDto employeeUpdateDto)
         {
-           //if(ModelState.IsValid)
-           // {
                 var root = _fileProvider.GetDirectoryContents("wwwroot");
                 var images = root.First(x => x.Name == "images");
                 var randomİmages = Guid.NewGuid() + Path.GetExtension(employeeUpdateDto.Image.FileName);
@@ -105,12 +103,10 @@ namespace YazRehProje.Areas.Admin.Controllers
                 employeeUpdateDto.ImagePath = randomİmages;
                 if (employeeUpdateDto is not null)
                 {
-                    //var employedto = _mapper.Map<Entities.Models.Employee>(employeeUpdateDto);
                     _manager.EmployeeServices.UpdateOneEmployee(employeeUpdateDto, employeeUpdateDto.EmployeeId, trackChanges: true);
                 _notifyService.Success("Başarılı");
                 return View("List", _manager.EmployeeServices.GetAllEmployee(true));
                 }
-            //}
             ViewBag.UpdateError = "Güncelleme Yaparken Hata Oluştu";
             _notifyService.Error("Başarısız");
 

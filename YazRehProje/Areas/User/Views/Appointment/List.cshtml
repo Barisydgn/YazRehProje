@@ -12,7 +12,9 @@
     <button id="filterButton">Filtrele</button>
 </div>
 
-<div id="filteredAppointments"></div>
+<div id="filteredAppointments">
+    @Html.Partial("_AppointmentPartial",Model)
+</div>
 
 
     
@@ -28,87 +30,25 @@
 
                 $.ajax({
                     contentType: "application/json",
-                    dataType: "json",
+                    dataType: "html",
                     type: "get",
                     url: "/User/Appointment/Ajax",
                     data: { selectedDate: date },
                     success: function (func) {
-                        let appointments = jQuery.parseJSON(func);
-
-                        let tablehtml =
-                            "<table class='table table-dark'><tr><th>#</th><th>Tarih</th><th>Saat</th><th>Ad Soyad</th><th>Bos Mu</th><th>Ödendi Mi</th><th>İşlem</th><th>İşlem</th></tr>";
-
-                        $.each(appointments, function (index, value) {
-                            let shortDate = new Date(value.AppointmentDate).toLocaleDateString();
-
-                            // Sadece boş olan randevuları filtrele
-                            if (value.BosDolu ) {
-                                let bosDoluContent = "Boş";
-                           
-                                
-                                tablehtml += `<tr><td>${value.AppointmentId}</td><td>${shortDate}</td><td>${value.AppointmentTime}</td><td>${value.StudentName} ${value.StudentSurname}</td><td>${bosDoluContent}</td><td>${value.Paid ? "Ödendi" : "Ödenmedi"}</td>
-                                                        <td><button  class="btn btn-success updateAppointment" data-appointment-id="${value.AppointmentId}" data-other-info="${value.OtherInfo}"><i class="fa fa-arrow-right" aria-hidden="true"></i>     Randevu Al</button></td>
-
-
-
-                                                                                            <td>
-                                            <a href="/User/Payment/Index" class="btn btn-success startPayment" data-appointment-id="${value.AppointmentId}" data-other-info="${value.OtherInfo}">
-                                        <i class="fa fa-arrow-right" aria-hidden="true"></i> Ödeme Yap
-                                    </a>
-                                </td>
-                                            </tr>`;
-                            }
-                        });
-
-                        tablehtml += "</table>";
-                        $("#filteredAppointments").html(tablehtml);
-
-                        // Yeni eklenen kısım başlangıcı
-                        $(".updateAppointment").click(function () {
-                            let appointmentId = $(this).data('appointment-id');
-                            let otherInfo = $(this).data('other-info');
-
-                            // Başka bir sayfaya yönlendir
-                            window.location.href = `/User/Appointment/CreateAppointment?appointmentId=${appointmentId}&otherInfo=${otherInfo}`;
-                        });
-                        // //Yeni eklenen kısım sonu
-                        //$(".startPayment").click(function () {
-                        //    let appointmentId = $(this).data('appointment-id');
-                        //    let otherInfo = $(this).data('other-info');
-
-                        //    window.location.href = "https://buy.stripe.com/test_eVa4hV7yscKg0Ni9AB"});
-
-                      
-                                    
-                               
+                        $('#filteredAppointments').html(func);
+          
                     },
 
 
-                        //$(".startPayment").click(function () {
-                        //    // AJAX isteği ile Checkout Session ID'sini al
-                        //    $.ajax({
-                        //        url: '/User/Payment/CreateCheckoutSession',
-                        //        method: 'POST',
-                        //        contentType: 'application/json',
-                        //        data: JSON.stringify({
-                        //            AppointmentId: appointmentId // Gerekli verileri buraya ekleyin
-                        //        }),
-                        //        success: function (response) {
-                        //            // Başarıyla alındıysa yönlendirme yap
-                        //            window.location.href = "https://checkout.stripe.com/pay/" + response.sessionId;
-                        //        },
-                        //        error: function (xhr, status, error) {
-                        //            // Hata durumunda burada işlem yapabilirsiniz
-                        //            console.error(error);
-                        //        }
-                        //    });
-                        //});
+                        
                     error: function (xhr, status, error) {
                         console.error(xhr.responseText);
                     },
                 });
             });
+           
         });
-    
+     
     </script>
+
 }
