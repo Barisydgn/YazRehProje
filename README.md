@@ -3,5 +3,5 @@ randevu oluşturma ve yönetme süreçlerini içerir (otomaik olarak her gece sa
 sağlar. Kullanıcılar, personel ve admin arayüzlerinde çeşitli işlemleri gerçekleştirebilirler, bu sayede sistem hem kullanıcılar hem de merkez personeli için etkili bir yönetim imkanı sunar.
 
 Kullanılan Teknolojiler : N Katmanlı Mimari , Entity Framework ,Automapper , İdentity , Ajax , Stripe Ödeme Sistemleri , Form Validation , Dto , Hata Yakalama , Mailkit , Notification , Dependency Injection,
-JavaScript,Html Css Bootstrap ,MSSQL , Repository Design Pattern ,Fluent Validation
+JavaScript,Html Css Bootstrap ,MSSQL , Repository Design Pattern ,Fluent Validation,Partial View
 
